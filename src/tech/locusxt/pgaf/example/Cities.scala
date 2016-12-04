@@ -1,11 +1,10 @@
+package tech.locusxt.pgaf.example
 import scala.io.Source
 import scala.math._
 
 /**
   * Created by zhuting on 2016/12/4.
   */
-package tech.locusxt.pgaf.example {
-
   import scala.collection.mutable.ArrayBuffer
 
   class Cities extends java.io.Serializable {
@@ -27,4 +26,3 @@ package tech.locusxt.pgaf.example {
     }
   }
 
-}

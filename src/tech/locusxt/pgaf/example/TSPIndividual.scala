@@ -1,12 +1,12 @@
 /**
   * Created by zhuting on 2016/12/4.
   */
-package tech.locusxt.pgaf.example {
+package tech.locusxt.pgaf.example
 
-  import tech.locusxt.pgaf.Individual
+import tech.locusxt.pgaf.Individual
 
-  import scala.collection.mutable.ArrayBuffer
-  import scala.util.Random
+import scala.collection.mutable.ArrayBuffer
+import scala.util.Random
 
   class TSPIndividual(val cities: Cities) extends Individual with java.io.Serializable{
     var chromosome = new Array[Int](cities.cityNum)
@@ -94,4 +94,3 @@ package tech.locusxt.pgaf.example {
       outList.toArray
     }
   }
-}
