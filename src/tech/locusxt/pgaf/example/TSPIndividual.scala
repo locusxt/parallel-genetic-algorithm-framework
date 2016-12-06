@@ -84,7 +84,7 @@ import scala.util.Random
       var arr = 0 until n toArray
       var outList:List[Int] = Nil
       var border = n
-      for (i <- 0 until n){
+      for (i <- 0 until n) {
         val index=(new Random).nextInt(border)
         outList = outList:::List(arr(index))
         arr(index) = arr.last

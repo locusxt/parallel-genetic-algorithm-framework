@@ -90,7 +90,7 @@ trait SerialPopulation extends Population{
     for (i <- 1 until size){
       if ((new Random()).nextDouble() <= mutateRate){
         mutateNum += 1
-        var tmp = individuals(i).mutate()
+        val tmp = individuals(i).mutate()
         individuals(i) = tmp
       }
     }
@@ -106,7 +106,7 @@ trait SerialPopulation extends Population{
 
   //TODO error exists here  //FIXED
   def genNextGeneration(): Unit ={
-    var tmp = individuals(bestIndividualIndex)
+    val tmp = individuals(bestIndividualIndex)
     //crossover
     val newChildren = crossoverStep(size - 1)
     //    print(newChildren.length)
@@ -135,7 +135,7 @@ trait SerialPopulation extends Population{
     }
   }
 
-  override def getBestIndividual(): Any = {
+  override def getBestIndividual: Any = {
     individuals(0)
   }
 }
