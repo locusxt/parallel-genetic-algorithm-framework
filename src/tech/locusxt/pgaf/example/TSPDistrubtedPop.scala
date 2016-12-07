@@ -9,8 +9,6 @@ import tech.locusxt.pgaf.{DistrubtedPopulation, Individual, SubPopulation}
   */
 class TSPDistrubtedPop(val sc : SparkContext, val slices : Int = 4,
                        val timeLimit: Int = Int.MaxValue, val evolveLimit: Int = Int.MaxValue) extends DistrubtedPopulation {
-//  override val sc: SparkContext = _
-//  override val slices: Int = _
   val populationArr = new Array[TSPSubPopulation](slices)
   for (i <- 0 until slices){
     populationArr(i) = new TSPSubPopulation
@@ -33,10 +31,10 @@ class TSPDistrubtedPop(val sc : SparkContext, val slices : Int = 4,
 
   override def checkLimit(): Boolean ={
     if (System.currentTimeMillis - startTime > timeLimit) true
-    //    else if (evolveCnt >= evolveLimit) true
+        else if (evolveCnt >= evolveLimit) true
     else false
   }
-//  override def checkLimit(): Boolean = ???
+
   override def evolve(): Unit ={
     startTime = System.currentTimeMillis
     var limit = false

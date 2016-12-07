@@ -7,9 +7,6 @@ package tech.locusxt.pgaf.example
 import tech.locusxt.pgaf.{Individual, SerialPopulation}
 
   class TSPSerialPop(var size:Int = 100, var crossoverRate:Double = 0.8, val timeLimit:Int = Int.MaxValue, val evolveLimit:Int = Int.MaxValue, var mutateRate: Double = 0.4) extends SerialPopulation with java.io.Serializable{
-//    override var size: Int = _Int
-//    override var crossoverRate: Double = _
-//    override var mutateRate: Double = _
     override var individuals = new Array[TSPIndividual](size).asInstanceOf[Array[Individual]]
     override var probability = new Array[Double](size)
     var cities = new Cities()

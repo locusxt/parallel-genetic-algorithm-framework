@@ -45,7 +45,7 @@ import scala.util.Random
           unvisited -= startCity
         }
       }
-//      new Individual(newChromosome.toArray, p1.cities)
+
       val p = new TSPIndividual(this.cities)
       p.chromosome = newChromosome.toArray
       p
@@ -57,7 +57,7 @@ import scala.util.Random
       val j = if (tmp >= i) tmp + 1 else tmp
       val newChromosome = this.chromosome.toBuffer
 
-      //just a swap(i, j)
+      //swap(i, j)
       tmp = newChromosome(j)
       newChromosome(j) = newChromosome(i)
       newChromosome(i) = tmp

@@ -9,25 +9,23 @@ import org.apache.spark.rdd.RDD
 trait DistrubtedPopulation extends Population{
   val sc:SparkContext
   val slices:Int
-//  var populationArr:Array[SubPopulation]
   var populationRDD:RDD[SubPopulation]
 
   def evolve(): Unit ={
-//    startTime = System.currentTimeMillis
     var limit = false
     populationRDD = populationRDD.map(p => {
       p.genOriginalPop()
       p
     }).cache()
 
-//    var lastBest = Int.MaxValue
     while(!limit){
       populationRDD = populationRDD.map(p => {
-        p.evolveFor(10000)
+        p.evolveFor(10000)//share best individuals every 10000 turns
         p
       }).cache()
       val bestIndividuals = populationRDD.map(p => p.individuals(0)).collect()
 
+      //share best individuals with *all* the subpopulations
       populationRDD = populationRDD.map(p => {
         p.updateWith(bestIndividuals)
         p

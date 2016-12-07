@@ -25,6 +25,7 @@ trait SerialPopulation extends Population{
     individuals.foreach(i => i.randomGen())//individual init
   }
 
+  //calculate fitness of all individuals
   def calFitness(): Unit ={
     individuals.foreach(i => i.calFitness())
     for (i <- 0 until size){
@@ -35,15 +36,8 @@ trait SerialPopulation extends Population{
     }
   }
 
-  //calculate property according to fitness
+  //calculate probablity according to fitness, the probablity is used to round robin select
   def calProbability(): Unit ={
-//      //adjust fitness
-//      var distSum = 0
-//      individuals.foreach(i => distSum += i.distanceSum)
-//      for (i <- 0 until size){
-//        individuals(i).fitness = 1.0 - individuals(i).distanceSum.toDouble / distSum.toDouble
-//      }
-
     var fitnessSum = 0.0
     individuals.foreach(i => fitnessSum += i.fitness)
     for (i <- 0 until size){
@@ -52,7 +46,7 @@ trait SerialPopulation extends Population{
   }
 
 
-  //selset based on round robin
+  //selset, based on round robin
   def select():Individual = {
     val targetProbabilitySum = (new Random()).nextDouble()
     var selectIndex = size - 1
@@ -68,7 +62,7 @@ trait SerialPopulation extends Population{
     individuals(selectIndex)
   }
 
-  //generate n individuals
+  //crossover to generate n new individuals
   def crossoverStep(n:Int) ={
     var newIndividuals = new Array[Individual](n)
     calProbability()
@@ -76,15 +70,13 @@ trait SerialPopulation extends Population{
       newIndividuals(i) =
         if ((new Random).nextDouble() <= crossoverRate && i != bestIndividualIndex)
           select().crossover(select())
-//          Individual.crossover(individuals(roundRobinSelect()), individuals(roundRobinSelect()))
         else
           select()
     }
-    //    newIndividuals.map(i => Individual.crossover(individuals(roundRobinSelect()), individuals(roundRobinSelect())))
     newIndividuals
   }
 
-  //return mutate num to help your test
+  //mutate to generate new individual, return mutate num to help your test
   def mutateStep(): Int ={
     var mutateNum = 0
     for (i <- 1 until size){
@@ -96,7 +88,7 @@ trait SerialPopulation extends Population{
     }
     //guarantee the first individual is the best
     if ((new Random()).nextDouble() <= mutateRate){
-      var tmp = individuals(0).mutate()
+      val tmp = individuals(0).mutate()
       tmp.calFitness()
       if(individuals(0).fitness < tmp.fitness)
         individuals(0) = tmp
@@ -109,7 +101,6 @@ trait SerialPopulation extends Population{
     val tmp = individuals(bestIndividualIndex)
     //crossover
     val newChildren = crossoverStep(size - 1)
-    //    print(newChildren.length)
     for (i <- 1 until size){
       individuals(i) = newChildren(i - 1)
     }
@@ -121,7 +112,7 @@ trait SerialPopulation extends Population{
     mutateStep()
   }
 
-  //when to stop
+  //check when to stop
   def checkLimit(): Boolean
 
   //this is a simple case you should always override it

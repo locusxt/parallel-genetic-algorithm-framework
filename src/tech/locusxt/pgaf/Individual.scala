@@ -7,6 +7,6 @@ trait Individual {
   var fitness:Double = 0.0
   def crossover(individual: Individual):Individual
   def mutate():Individual
-  def randomGen()
+  def randomGen()//generate new individual randomly
   def calFitness()
 }
