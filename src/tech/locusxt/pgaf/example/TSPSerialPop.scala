@@ -45,7 +45,7 @@ import tech.locusxt.pgaf.{Individual, SerialPopulation}
       var lastBest = Int.MaxValue
       while (!limit){
         calFitness()
-        minDistance = getBestIndividual().asInstanceOf[TSPIndividual].distanceSum
+        minDistance = getBestIndividual.asInstanceOf[TSPIndividual].distanceSum
         if(evolveCnt % 100 == 0 || minDistance != lastBest) {printInfo(); lastBest = minDistance;}
         genNextGeneration()
         limit = checkLimit()

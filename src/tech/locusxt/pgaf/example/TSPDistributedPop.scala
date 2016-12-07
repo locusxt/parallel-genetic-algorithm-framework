@@ -2,13 +2,13 @@ package tech.locusxt.pgaf.example
 
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
-import tech.locusxt.pgaf.{DistrubtedPopulation, Individual, SubPopulation}
+import tech.locusxt.pgaf.{DistributedPopulation, Individual, SubPopulation}
 
 /**
   * Created by zhuting on 2016/12/6.
   */
-class TSPDistrubtedPop(val sc : SparkContext, val slices : Int = 4,
-                       val timeLimit: Int = Int.MaxValue, val evolveLimit: Int = Int.MaxValue) extends DistrubtedPopulation {
+class TSPDistributedPop(val sc : SparkContext, val slices : Int = 4,
+                       val timeLimit: Int = Int.MaxValue, val evolveLimit: Int = Int.MaxValue) extends DistributedPopulation {
   val populationArr = new Array[TSPSubPopulation](slices)
   for (i <- 0 until slices){
     populationArr(i) = new TSPSubPopulation

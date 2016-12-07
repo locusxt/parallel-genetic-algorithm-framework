@@ -6,7 +6,7 @@ import org.apache.spark.rdd.RDD
 /**
 * Created by zhuting on 2016/12/4.
 */
-trait DistrubtedPopulation extends Population{
+trait DistributedPopulation extends Population{
   val sc:SparkContext
   val slices:Int
   var populationRDD:RDD[SubPopulation]
